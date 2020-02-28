@@ -2,8 +2,8 @@ const db = require('knex')({
   client: 'mysql2',
   connection: {
     host: '127.0.0.1',
-    user: 'root',
-    password: 'root',
+		user: 'root',
+    password: 'vin@0920',
     database: 'devshop'
   }
 })
@@ -11,6 +11,9 @@ const db = require('knex')({
 const app = require('./app')(db)
 
 const port = process.env.PORT || 3000
+
+const user = require('./models/user')
+user.initialUser(db)()
 
 db.on('query', query => {
   console.log('QUERY EXECUTE: ', query.sql)
